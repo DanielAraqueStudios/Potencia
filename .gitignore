@@ -1,0 +1,13 @@
+# Ruflo local secrets and runtime data
+.env
+.env.local
+.env.*.local
+.claude-flow/
+.claude/
+.swarm/
+CLAUDE.md
+
+# Python
+__pycache__/
+*.pyc
+.pytest_cache/

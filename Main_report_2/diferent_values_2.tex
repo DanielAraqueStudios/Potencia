@@ -1,0 +1,389 @@
+\documentclass[12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[spanish]{babel}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{geometry}
+\geometry{margin=2.5cm}
+
+\title{Electrónica de Potencia \\ \large Rectificadores -- Solución Paso a Paso}
+\author{}
+\date{}
+
+\begin{document}
+\maketitle
+
+\section*{Datos generales}
+$R = 15\ \Omega \qquad L = 38\ \text{mH}$
+
+\section{Ejercicio 1 -- Rectificador trifásico de 6 pulsos}
+
+\textbf{Datos:} $V_L = 380\ V$, $f = 50\ Hz$, $R = 15\ \Omega$, $L = 38\ mH$
+
+\subsection*{Paso 1: Voltaje pico}
+\begin{equation}
+V_m = V_L\sqrt{2} = 380\sqrt{2} = 537\ V
+\end{equation}
+
+\subsection*{Paso 2: Componente DC ($n=0$, $m=0$)}
+Límites de integración: $-\pi/6$ a $\pi/6$
+\begin{equation}
+V_{DC}=\frac{1}{\pi/3}\int_{-\pi/6}^{\pi/6}537\cos\theta\,d\theta=\frac{3(537)}{\pi}\left[\sin\frac{\pi}{6}-\sin\left(-\frac{\pi}{6}\right)\right]
+\end{equation}
+\begin{equation}
+\boxed{V_{DC}=513\ V}
+\end{equation}
+
+\begin{equation}
+I_{DC}=\frac{V_{DC}}{R}=\frac{513}{15}
+\end{equation}
+\begin{equation}
+\boxed{I_{DC}=34.2\ A}
+\end{equation}
+
+\subsection*{Paso 3: Armónico 6 ($n=1$, $m=6$, $f=300\ Hz$)}
+\begin{equation}
+a_6=\frac{2}{\pi/3}\int_{-\pi/6}^{\pi/6}537\cos\theta\cos(6\theta)\,d\theta
+\end{equation}
+\begin{equation}
+\boxed{a_6=29.3\ V} \qquad \boxed{b_6=0\ V}
+\end{equation}
+
+\subsection*{Paso 4: Impedancia a 300 Hz}
+\begin{equation}
+Z_6=R+j\omega_6L=15+j(600\pi)(0.038)=15+j71.63
+\end{equation}
+\begin{equation}
+\boxed{Z_6=73.18\angle1.364\ \Omega}
+\end{equation}
+
+\subsection*{Paso 5: Corriente del armónico 6}
+\begin{equation}
+I_6=\frac{29.3\angle0°}{73.18\angle1.364}
+\end{equation}
+\begin{equation}
+\boxed{I_6=0.400\angle{-1.364}\ A}
+\end{equation}
+
+\subsection*{Paso 6: Funciones de salida}
+\begin{equation}
+V_o(t)=\underbrace{513}_{DC}+\underbrace{29.3\cos(600\pi t)}_{AC}+\cdots\ V
+\end{equation}
+\begin{equation}
+I_o(t)=\underbrace{34.2}_{DC}+\underbrace{0.400\cos(600\pi t-1.364)}_{AC}+\cdots\ A
+\end{equation}
+
+\subsection*{Paso 7: $V_{rms}$, $I_{rms}$}
+\begin{equation}
+V_{rms}=\sqrt{V_{DC}^2+\frac{a_6^2}{2}}=\sqrt{513^2+\frac{29.3^2}{2}}
+\end{equation}
+\begin{equation}
+\boxed{V_{rms}=513.4\ V}
+\end{equation}
+
+\begin{equation}
+I_{rms}=\sqrt{I_{DC}^2+\frac{I_6^2}{2}}=\sqrt{34.2^2+\frac{0.4^2}{2}}
+\end{equation}
+\begin{equation}
+\boxed{I_{rms}=34.2\ A}
+\end{equation}
+
+\subsection*{Paso 8: Corrientes eficaces de línea y diodo}
+\begin{equation}
+I_L=I_{DC}\sqrt{\frac{2}{3}}=34.2(0.8165)
+\end{equation}
+\begin{equation}
+\boxed{I_L=27.9\ A}
+\end{equation}
+
+\begin{equation}
+I_D=\frac{I_{DC}}{\sqrt3}=\frac{34.2}{1.732}
+\end{equation}
+\begin{equation}
+\boxed{I_D=19.75\ A}
+\end{equation}
+
+\subsection*{Paso 9: Potencia y factor de potencia}
+\begin{equation}
+P=I_{rms}^2R=(34.2)^2(15)
+\end{equation}
+\begin{equation}
+\boxed{P=17{,}545\ W}
+\end{equation}
+
+\begin{equation}
+S=\sqrt3\,V_L\,I_L=\sqrt3(380)(27.9)
+\end{equation}
+\begin{equation}
+\boxed{S=18{,}376\ VA}
+\end{equation}
+
+\begin{equation}
+FP=\frac{P}{S}
+\end{equation}
+\begin{equation}
+\boxed{FP=0.955}
+\end{equation}
+
+\newpage
+\section{Ejercicio 2 -- Rectificador trifásico de media onda (3 diodos)}
+
+\textbf{Datos:} $V_f = 260\ V$, $f = 50\ Hz$, $R = 15\ \Omega$, $L = 38\ mH$
+
+\subsection*{Paso 1: Voltajes de referencia}
+\begin{equation}
+V_m=260\sqrt2=368\ V \qquad V_L=\sqrt3(260)=450\ V
+\end{equation}
+
+\subsection*{Paso 2: Componente DC (integración $-\pi/3$ a $\pi/3$)}
+\begin{equation}
+V_{DC}=\frac{1}{2\pi/3}\int_{-\pi/3}^{\pi/3}368\cos\theta\,d\theta=\frac{3(368)}{2\pi}\left[\sin\frac{\pi}{3}-\sin\left(-\frac{\pi}{3}\right)\right]
+\end{equation}
+\begin{equation}
+\boxed{V_{DC}=304.4\ V}
+\end{equation}
+
+\begin{equation}
+I_{DC}=\frac{304.4}{15}
+\end{equation}
+\begin{equation}
+\boxed{I_{DC}=20.29\ A}
+\end{equation}
+
+\subsection*{Paso 3: Armónico 6 ($f=300\ Hz$)}
+\begin{equation}
+a_6=\frac{2}{2\pi/3}\int_{-\pi/3}^{\pi/3}368\cos\theta\cos(6\theta)\,d\theta
+\end{equation}
+\begin{equation}
+\boxed{a_6=-17.4\ V} \qquad \boxed{b_6=0\ V}
+\end{equation}
+
+\subsection*{Paso 4: Impedancia (mismo $L$ que Ejercicio 1)}
+\begin{equation}
+\boxed{Z_6=15+j71.63=73.18\angle1.364\ \Omega}
+\end{equation}
+
+\subsection*{Paso 5: Corriente del armónico 6}
+\begin{equation}
+I_6=\frac{17.4\angle0°}{73.18\angle1.364}
+\end{equation}
+\begin{equation}
+\boxed{I_6=0.238\angle{-1.364}\ A}
+\end{equation}
+
+\subsection*{Paso 6: Funciones de salida}
+\begin{equation}
+V_o(t)=304.4-17.4\cos(600\pi t)+\cdots\ V
+\end{equation}
+\begin{equation}
+I_o(t)=20.29+0.238\cos(600\pi t-1.364)+\cdots\ A
+\end{equation}
+
+\subsection*{Paso 7: $V_{rms}$, $I_{rms}$}
+\begin{equation}
+V_{rms}=\sqrt{304.4^2+\frac{17.4^2}{2}}
+\end{equation}
+\begin{equation}
+\boxed{V_{rms}=304.6\ V}
+\end{equation}
+
+\begin{equation}
+I_{rms}=\sqrt{20.29^2+\frac{0.238^2}{2}}
+\end{equation}
+\begin{equation}
+\boxed{I_{rms}=20.29\ A}
+\end{equation}
+
+\subsection*{Paso 8: Corrientes de línea y diodo}
+\begin{equation}
+I_L=I_D=\frac{I_{DC}}{\sqrt3}=\frac{20.29}{1.732}
+\end{equation}
+\begin{equation}
+\boxed{I_L=I_D=11.72\ A}
+\end{equation}
+
+\subsection*{Paso 9: Potencia, $S$, FP, $\eta$}
+\begin{equation}
+P=I_{rms}^2R=(20.29)^2(15)
+\end{equation}
+\begin{equation}
+\boxed{P=6175.3\ W}
+\end{equation}
+
+\begin{equation}
+S=\sqrt3\,V_L\,I_L=\sqrt3(450)(11.72)
+\end{equation}
+\begin{equation}
+\boxed{S=9132\ VA}
+\end{equation}
+
+\begin{equation}
+FP=\frac{P}{S}
+\end{equation}
+\begin{equation}
+\boxed{FP=0.676}
+\end{equation}
+
+\begin{equation}
+P_{DC}=V_{DC}\,I_{DC}=304.4(20.29)
+\end{equation}
+\begin{equation}
+\boxed{P_{DC}=6176\ W}
+\end{equation}
+
+\begin{equation}
+\eta=\frac{P_{DC}}{S}
+\end{equation}
+\begin{equation}
+\boxed{\eta=0.676}
+\end{equation}
+
+\newpage
+\section{Ejercicio 3 -- Rectificador controlado (SCR) monofásico de media onda con carga RL}
+
+\textbf{Datos:} $V_s = 180\ V\ (V_m)$, $f = 60\ Hz$, $\alpha = 37°$, $R = 15\ \Omega$, $L = 38\ mH$
+
+\subsection*{Paso 1: $\omega$ y $\alpha$ en radianes/tiempo}
+\begin{equation}
+\omega=2\pi(60)=377\ \text{rad/s}
+\end{equation}
+\begin{equation}
+\alpha=37°=0.6458\ \text{rad} \qquad t_1=\frac{\alpha}{\omega}=1.713\ \text{ms}
+\end{equation}
+
+\subsection*{Paso 2: Impedancia}
+\begin{equation}
+Z=15+j(377)(0.038)=15+j14.33
+\end{equation}
+\begin{equation}
+\boxed{Z=20.75\angle0.7623\ \Omega}
+\end{equation}
+
+\subsection*{Paso 3: Constante de tiempo}
+\begin{equation}
+\tau=\frac{L}{R}=\frac{0.038}{15}=2.533\ \text{ms} \qquad \frac{1}{\tau}=394.7\ \frac{1}{s}
+\end{equation}
+
+\subsection*{Paso 4: Corriente forzada}
+\begin{equation}
+I_m=\frac{180}{20.75}=8.675\ A
+\end{equation}
+\begin{equation}
+i(t)=8.675\sin(377t-0.7623)+I_0e^{-394.7(t-t_1)}
+\end{equation}
+
+\subsection*{Paso 5: Condición inicial $i(t_1)=0$ $\rightarrow$ hallar $I_0$}
+\begin{equation}
+0=8.675\sin(\alpha-\theta_Z)+I_0=8.675\sin(-0.1165)+I_0
+\end{equation}
+\begin{equation}
+\boxed{I_0=1.009\ A}
+\end{equation}
+
+\subsection*{Paso 6: Extinción $t_e$ (SOLVE numérico)}
+\begin{equation}
+0=8.675\sin(377t_e-0.7623)+1.009\,e^{-394.7(t_e-0.001713)}
+\end{equation}
+\begin{equation}
+\boxed{t_e\approx10.37\ \text{ms}}
+\end{equation}
+
+\subsection*{Paso 7: Ángulo de extinción y conducción}
+\begin{equation}
+\beta=\omega t_e=3.908\ \text{rad}=223.9°
+\end{equation}
+\begin{equation}
+\gamma=\beta-\alpha=186.9°
+\end{equation}
+
+\subsection*{Paso 8: Funciones de salida}
+\begin{equation}
+i(t)=
+\begin{cases}
+8.675\sin(377t-0.7623)+1.009e^{-394.7(t-0.001713)}, & t_1\leq t\leq t_e\\
+0, & t_e<t\leq T
+\end{cases}
+\end{equation}
+
+\subsection*{Paso 9: $V_{DC}$, $V_{rms}$}
+\begin{equation}
+V_{DC}=\frac{V_m}{2\pi}[\cos\alpha-\cos\beta]=\frac{180}{2\pi}[0.7986-(-0.7204)]
+\end{equation}
+\begin{equation}
+\boxed{V_{DC}=43.5\ V}
+\end{equation}
+
+\begin{equation}
+V_{rms}=\sqrt{\frac{V_m^2}{2\pi}\left[\frac{\beta-\alpha}{2}-\frac{\sin2\beta-\sin2\alpha}{4}\right]}
+\end{equation}
+\begin{equation}
+\boxed{V_{rms}=91.4\ V}
+\end{equation}
+
+\subsection*{Paso 10: $I_{DC}$, $I_{rms}$ (integración numérica $t_1$ a $t_e$)}
+\begin{equation}
+I_{DC}=\frac{1}{T}\int_{t_1}^{t_e}i(t)\,dt
+\end{equation}
+\begin{equation}
+\boxed{I_{DC}=2.90\ A}
+\end{equation}
+
+\begin{equation}
+I_{rms}=\sqrt{\frac{1}{T}\int_{t_1}^{t_e}i(t)^2\,dt}
+\end{equation}
+\begin{equation}
+\boxed{I_{rms}=4.49\ A}
+\end{equation}
+
+\subsection*{Paso 11: Potencia, FP, $\eta$}
+\begin{equation}
+P=I_{rms}^2R=(4.49)^2(15)
+\end{equation}
+\begin{equation}
+\boxed{P=302.5\ W}
+\end{equation}
+
+\begin{equation}
+S=\frac{V_m}{\sqrt2}\,I_{rms}=127.3(4.49)
+\end{equation}
+\begin{equation}
+\boxed{S=571.6\ VA}
+\end{equation}
+
+\begin{equation}
+FP=\frac{P}{S}
+\end{equation}
+\begin{equation}
+\boxed{FP=0.529}
+\end{equation}
+
+\begin{equation}
+P_{DC}=V_{DC}I_{DC}=43.5(2.90)
+\end{equation}
+\begin{equation}
+\boxed{P_{DC}=126.2\ W}
+\end{equation}
+
+\begin{equation}
+\eta=\frac{P_{DC}}{S}
+\end{equation}
+\begin{equation}
+\boxed{\eta=0.221=22.1\%}
+\end{equation}
+
+\subsection*{Paso 12: Factores de rizado}
+\begin{equation}
+FR_V=\frac{\sqrt{V_{rms}^2-V_{DC}^2}}{V_{DC}}
+\end{equation}
+\begin{equation}
+\boxed{FR_V=1.85}
+\end{equation}
+
+\begin{equation}
+FR_I=\frac{\sqrt{I_{rms}^2-I_{DC}^2}}{I_{DC}}
+\end{equation}
+\begin{equation}
+\boxed{FR_I=1.18}
+\end{equation}
+
+\end{document}

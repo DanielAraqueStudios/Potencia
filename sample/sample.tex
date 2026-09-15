@@ -1,0 +1,531 @@
+\documentclass[12pt,a4paper]{article}
+
+% PAQUETES
+\usepackage[utf8]{inputenc}
+\usepackage[spanish]{babel}
+\usepackage[margin=2.5cm]{geometry}
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{graphicx}
+\usepackage{textcomp}
+\usepackage{xcolor}
+\usepackage{float}
+\usepackage{url}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{multirow}
+\usepackage{hyperref}
+\usepackage{listings}
+\usepackage{matlab-prettifier}
+\usepackage{listings}
+\usepackage{xcolor}
+
+\lstdefinestyle{matlabstyle}{
+    language           = Matlab,
+    basicstyle         = \ttfamily\footnotesize,
+    keywordstyle       = \color{blue},
+    commentstyle       = \color{gray},
+    stringstyle        = \color{purple},
+    numbers            = left,
+    numberstyle        = \tiny\color{gray},
+    stepnumber         = 1,
+    numbersep          = 8pt,
+    backgroundcolor    = \color{white},
+    frame              = single,
+    rulecolor          = \color{black!30},
+    breaklines         = true,
+    breakatwhitespace  = false,
+    showstringspaces   = false,
+    tabsize            = 2,
+    captionpos         = b
+}
+
+\lstset{style=matlabstyle}
+
+\begin{document}
+\section{Ejercicio 3}
+
+3. El rectificador de la figura con: Vs=208, f=60Hz V; R=2(a+b+c)$\Omega$; L=2(b+c)mH;
+determinar: a) las funciones de tensión y corriente de salida (dibújelas), b) las tensiones dc y
+eficaz y la corrientes dc y rms en la carga y en el diodo, d) la potencia, el factor de potencia
+la eficiencia y los FR para tensión y corriente. Realizar la simulación y las comparaciones.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.7\textwidth]{circuito3.png}
+    \caption{Circuito 3: Rectificador monofásico de onda completa tipo puente}
+\end{figure}
+
+\subsection{Procedimiento}
+
+Desarrollo matemático:
+
+\begin{equation}
+    R = 2(a+b+c) = 2(3+9+3) = 30{,}0\,\Omega
+\end{equation}
+
+\begin{equation}
+    L = 2(b+c) = 2(9+3) = 24{,}0\,\text{mH} = 0{,}0240\,\text{H}
+\end{equation}
+
+\begin{equation}
+    V_{in} = 208\,\text{V}, \quad f = 60{,}0\,\text{Hz}
+\end{equation}
+
+\begin{equation}
+    V_m = 208\,\text{V} \times 1{,}414 = 294\,\text{V}
+\end{equation}
+
+\begin{equation}
+    \omega = 2\pi f = 2 \times 3{,}142 \times 60{,}0\,\text{Hz} = 377\,\text{rad/s}
+\end{equation}
+
+\textbf{Para $n=0$, $m=0$:}
+
+\begin{equation}
+    V_{DC} = \frac{1}{\pi\,\text{rad}} \int_{0\,\text{rad}}^{\pi\,\text{rad}} 294\,\text{V}\sin(\theta)\,d\theta
+\end{equation}
+
+\begin{equation}
+    V_{DC} = \frac{294\,\text{V}}{\pi\,\text{rad}}\left[-\cos(\theta)\right]_{0\,\text{rad}}^{\pi\,\text{rad}}
+\end{equation}
+
+\begin{equation}
+    \boxed{V_{DC} = 187\,\text{V}}
+\end{equation}
+
+\begin{equation}
+    I_{DC} = \frac{187\,\text{V}}{30{,}0\,\Omega} = \boxed{6{,}23\,\text{A}}
+\end{equation}
+
+\textbf{Para $n=1$, $m=2$, $f=120$\,Hz:}
+
+\begin{equation}
+    a_1 = \frac{2}{\pi\,\text{rad}} \int_{0\,\text{rad}}^{\pi\,\text{rad}} 294\,\text{V}\sin(\theta)\cos(2\theta)\,d\theta
+\end{equation}
+
+\begin{equation}
+    a_1 = \frac{588\,\text{V}}{\pi\,\text{rad}} \int_{0\,\text{rad}}^{\pi\,\text{rad}} \sin(\theta)\cos(2\theta)\,d\theta
+\end{equation}
+
+\begin{equation}
+    a_1 = -125\,\text{V}
+\end{equation}
+
+\begin{equation}
+    b_1 = \frac{2}{\pi\,\text{rad}} \int_{0\,\text{rad}}^{\pi\,\text{rad}} 294\,\text{V}\sin(\theta)\sin(2\theta)\,d\theta = 0\,\text{V}
+\end{equation}
+
+\begin{equation}
+    \omega_1 = 2\omega = 2 \times 377\,\text{rad/s} = 754\,\text{rad/s}
+\end{equation}
+
+\begin{equation}
+    X_{L,1} = \omega_1 L = 754\,\text{rad/s} \times 0{,}024\,\text{H} = 18{,}1\,\Omega
+\end{equation}
+
+\begin{equation}
+    Z_1 = 30{,}0\,\Omega + j18{,}1\,\Omega = 35{,}0\,\Omega \angle 0{,}543\,\text{rad}
+\end{equation}
+
+\begin{equation}
+    I_1 = \frac{125\,\text{V}\angle 0\,\text{rad}}{35{,}0\,\Omega \angle 0{,}543\,\text{rad}} = 3{,}57\,\text{A}\angle(-0{,}543\,\text{rad})
+\end{equation}
+
+\textbf{Para $n=2$, $m=4$, $f=240$\,Hz:}
+
+\begin{equation}
+    a_2 = \frac{2}{\pi\,\text{rad}} \int_{0\,\text{rad}}^{\pi\,\text{rad}} 294\,\text{V}\sin(\theta)\cos(4\theta)\,d\theta = -25{,}0\,\text{V}
+\end{equation}
+
+\begin{equation}
+    b_2 = \frac{2}{\pi\,\text{rad}} \int_{0\,\text{rad}}^{\pi\,\text{rad}} 294\,\text{V}\sin(\theta)\sin(4\theta)\,d\theta = 0\,\text{V}
+\end{equation}
+
+\begin{equation}
+    \omega_2 = 4\omega = 4 \times 377\,\text{rad/s} = 1508\,\text{rad/s}
+\end{equation}
+
+\begin{equation}
+    X_{L,2} = \omega_2 L = 1508\,\text{rad/s} \times 0{,}0240\,\text{H} = 36{,}2\,\Omega
+\end{equation}
+
+\begin{equation}
+    Z_2 = 30{,}0\,\Omega + j36{,}2\,\Omega = 47{,}0\,\Omega \angle 0{,}879\,\text{rad}
+\end{equation}
+
+\begin{equation}
+    I_2 = \frac{25{,}0\,\text{V}\angle 0\,\text{rad}}{47{,}0\,\Omega \angle 0{,}879\,\text{rad}} = 0{,}531\,\text{A}\angle(-0{,}879\,\text{rad})
+\end{equation}
+
+\textbf{Para $n=3$, $m=6$, $f=360$\,Hz:}
+
+\begin{equation}
+    a_3 = \frac{2}{\pi\,\text{rad}} \int_{0\,\text{rad}}^{\pi\,\text{rad}} 294\,\text{V}\sin(\theta)\cos(6\theta)\,d\theta = -10{,}7\,\text{V}
+\end{equation}
+
+\begin{equation}
+    b_3 = \frac{2}{\pi\,\text{rad}} \int_{0\,\text{rad}}^{\pi\,\text{rad}} 294\,\text{V}\sin(\theta)\sin(6\theta)\,d\theta = 0\,\text{V}
+\end{equation}
+
+\begin{equation}
+    \omega_3 = 6\omega = 6 \times 377\,\text{rad/s} = 2262\,\text{rad/s}
+\end{equation}
+
+
+\textbf{Funciones de tensión y corriente de salida:}
+
+\begin{equation}
+\begin{split}
+    v_o(t) = 187\,\text{V} &- 125\,\text{V}\cos(754\,\text{rad/s}\cdot t) \\
+    &- 25{,}0\,\text{V}\cos(1508\,\text{rad/s}\cdot t) \\
+    &- 10{,}7\,\text{V}\cos(2262\,\text{rad/s}\cdot t)
+\end{split}
+\end{equation}
+
+\begin{equation}
+\begin{split}
+    i_o(t) = 6{,}23\,\text{A} &+ 3{,}56\,\text{A}\sin(754\,\text{rad/s}\cdot t - 0{,}543\,\text{rad}) \\
+    &+ 0{,}531\,\text{A}\sin(1508\,\text{rad/s}\cdot t - 0{,}879\,\text{rad})
+\end{split}
+\end{equation}
+
+\textbf{Cálculo de valores RMS y componentes AC:}
+
+\begin{equation}
+    V_{rms} = \sqrt{(187\,\text{V})^2 + \frac{(125\,\text{V})^2 + (25{,}0\,\text{V})^2 + (10{,}7\,\text{V})^2}{2}} = 208\,\text{V}
+\end{equation}
+
+\begin{equation}
+    I_{rms} = \sqrt{(6{,}24\,\text{A})^2 + \frac{(3{,}56\,\text{A})^2 + (0{,}531\,\text{A})^2}{2}} = 6{,}73\,\text{A}
+\end{equation}
+
+\begin{equation}
+    V_{ac} = \sqrt{(208\,\text{V})^2 - (187\,\text{V})^2} = 91{,}0\,\text{V}
+\end{equation}
+
+\begin{equation}
+    I_{ac} = \sqrt{(6{,}73\,\text{A})^2 - (6{,}23\,\text{A})^2} = 2{,}55\,\text{A}
+\end{equation}
+
+\textbf{Corrientes en el diodo:}
+
+\begin{equation}
+    I_{D,DC} = \frac{6{,}23\,\text{A}}{2} = 3{,}12\,\text{A}
+\end{equation}
+
+\begin{equation}
+    I_{D,rms} = \frac{6{,}73\,\text{A}}{\sqrt{2}} = 4{,}76\,\text{A}
+\end{equation}
+
+\textbf{Cálculo de potencias:}
+
+\begin{equation}
+    P = (6{,}73\,\text{A})^2 \times 30{,}0\,\Omega = 1354\,\text{W}
+\end{equation}
+
+\begin{equation}
+    S = 208\,\text{V} \times 6{,}73\,\text{A} = 1399\,\text{VA}
+\end{equation}
+
+\begin{equation}
+    P_{DC} = 187\,\text{V} \times 6{,}23\,\text{A} = 1165\,\text{W}
+\end{equation}
+
+\textbf{Parámetros de calidad:}
+
+\begin{equation}
+    fp = \frac{1354\,\text{W}}{1399\,\text{VA}} = \boxed{0{,}968}
+\end{equation}
+
+\begin{equation}
+    \eta = \frac{1165\,\text{W}}{1399\,\text{VA}} = \boxed{0{,}833}
+\end{equation}
+
+\begin{equation}
+    FR_V = \frac{91{,}0\,\text{V}}{187\,\text{V}} = \boxed{0{,}487}
+\end{equation}
+
+\begin{equation}
+    FR_I = \frac{2{,}55\,\text{A}}{6{,}23\,\text{A}} = \boxed{0{,}409}
+\end{equation}
+
+\subsection{Gráficas de las funciones teóricas}
+
+A continuación se presentan las gráficas de $v_o(t)$ e $i_o(t)$ obtenidas del análisis de
+Fourier (elaboradas con los datos anteriores):
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{Funvol.png}
+    \caption{Función de tensión de salida $v_o(t)$ - Gráfica teórica}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{Funcor.png}
+    \caption{Función de corriente de salida $i_o(t)$ - Gráfica teórica}
+\end{figure}
+
+
+\subsection{Gráficas de las funciones teóricas}
+
+A continuación se presenta el código de MATLAB utilizado para generar las gráficas
+de $v_o(t)$ e $i_o(t)$ a partir del análisis de Fourier obtenido en el procedimiento:
+
+\begin{lstlisting}[caption={Código MATLAB para graficar $v_o(t)$ e $i_o(t)$ - Ejercicio 3}, label={lst:ejercicio3}]
+%% Ejercicio 3 - Rectificador monofasico de onda completa tipo puente
+%  Graficas de vo(t) e io(t) obtenidas del analisis de Fourier
+%  a=3, b=9, c=3 -> R=30 Ohm, L=24 mH
+clear; clc; close all;
+
+%% Vector de tiempo
+f0   = 60;                       % Hz
+T0   = 1/f0;                     % periodo de salida
+t    = linspace(0, 1*T0, 5000);  % un periodo
+
+%% ---------- Tension de salida vo(t) ----------
+VDC = 187;      % V
+V1  = 125;      % V
+V2  = 25.0;     % V
+V3  = 10.7;     % V
+
+w1 = 754;   % rad/s
+w2 = 1508;  % rad/s
+w3 = 2262;  % rad/s
+
+vo = VDC - V1*cos(w1*t) - V2*cos(w2*t) - V3*cos(w3*t);
+
+%% ---------- Corriente de salida io(t) ----------
+IDC = 6.23;     % A
+I1  = 3.57;     % A
+I2  = 0.532;    % A
+
+phi1 = 0.543;   % rad
+phi2 = 0.879;   % rad
+
+io = IDC + I1*sin(w1*t - phi1) + I2*sin(w2*t - phi2);
+
+%% ---------- Tension de entrada (referencia) ----------
+Vm = 294;       % V pico
+w  = 377;       % rad/s
+vin = Vm*sin(w*t);
+
+%% ================= FIGURA 1: VOLTAJES =================
+figure('Color','w','Position',[100 100 900 450]);
+plot(t*1000, vin, 'r', 'LineWidth', 1.2); hold on;
+plot(t*1000, vo, 'b', 'LineWidth', 1.6);
+grid on; box on;
+xlabel('Tiempo (ms)', 'FontSize', 11);
+ylabel('Voltaje (V)', 'FontSize', 11);
+title('Taller\_Punto3 - Voltajes', 'FontSize', 12, 'FontWeight', 'bold');
+legend('Voltaje de entrada (v_{in})', 'Voltaje de salida (v_o)', ...
+       'Location', 'southoutside', 'Orientation', 'horizontal');
+set(gca, 'FontSize', 10);
+xlim([0 max(t)*1000]);
+exportgraphics(gcf, 'vo_ejercicio3.png', 'Resolution', 300);
+
+%% ================= FIGURA 2: CORRIENTES =================
+figure('Color','w','Position',[100 100 900 450]);
+plot(t*1000, io, 'Color', [0 0.6 0], 'LineWidth', 1.6);
+grid on; box on;
+xlabel('Tiempo (ms)', 'FontSize', 11);
+ylabel('Corriente (A)', 'FontSize', 11);
+title('Taller\_Punto3 - Corriente de salida', 'FontSize', 12, 'FontWeight', 'bold');
+legend('Corriente de salida (i_o)', 'Location', 'southoutside');
+set(gca, 'FontSize', 10);
+xlim([0 max(t)*1000]);
+ylim([min(io)-0.5 max(io)+0.5]);
+exportgraphics(gcf, 'io_ejercicio3.png', 'Resolution', 300);
+
+%% ============= Valores de verificacion en consola =============
+fprintf('VDC   = %.2f V\n', mean(vo));
+fprintf('Vrms  = %.2f V\n', rms(vo));
+fprintf('IDC   = %.2f A\n', mean(io));
+fprintf('Irms  = %.2f A\n', rms(io));
+\end{lstlisting}
+\subsection{Simulación}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{simulacion_ejercicio3.png}
+    \caption{Simulación en Simulink del rectificador de onda completa tipo puente
+    ($V_s=208\,\text{V}$, $f=60\,\text{Hz}$, $L=24{,}0\,\text{mH}$, $R=30{,}0\,\Omega$)}
+\end{figure}
+
+De la simulación se obtuvieron los siguientes valores medidos en la carga:
+
+\begin{itemize}
+    \item $I_{DC} = 6{,}07\,\text{A}$, \quad $I_{rms} = 6{,}57\,\text{A}$
+    \item $V_{DC} = 182\,\text{V}$, \quad $V_{rms} = 203\,\text{V}$
+\end{itemize}
+
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.9\textwidth]{simuvol.png}
+    \caption{Simulación en Simulink de la salida de voltaje}
+\end{figure}
+
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.9\textwidth]{simucor.png}
+    \caption{Simulación en Simulink de la salida de corriente}
+\end{figure}
+
+
+\subsection{Análisis}
+
+El rectificador de onda completa tipo puente con carga R-L presenta las siguientes
+características fundamentales:
+
+\textbf{Comportamiento del circuito:}
+\begin{itemize}
+    \item El puente rectificador convierte ambos semiciclos de la señal AC de entrada en
+    pulsos positivos, duplicando la frecuencia de salida a 120\,Hz.
+    \item La inductancia de 24{,}0\,mH actúa como filtro, reduciendo el rizado de corriente
+    y suavizando la forma de onda.
+    \item Los armónicos predominantes son pares ($m=2,4,6$) con amplitudes decrecientes
+    debido al efecto de filtrado de la inductancia.
+\end{itemize}
+
+\textbf{Cálculos de valores no medidos (a partir de la simulación):}
+
+\begin{equation}
+    V_{AC} = \sqrt{(203\,\text{V})^2 - (182\,\text{V})^2} = 89{,}9\,\text{V}
+\end{equation}
+
+\begin{equation}
+    I_{AC} = \sqrt{(6{,}57\,\text{A})^2 - (6{,}07\,\text{A})^2} = 2{,}51\,\text{A}
+\end{equation}
+
+\begin{equation}
+    I_{D,DC} = \frac{6{,}07\,\text{A}}{2} = 3{,}04\,\text{A}
+\end{equation}
+
+\begin{equation}
+    I_{D,rms} = \frac{6{,}57\,\text{A}}{\sqrt{2}} = 4{,}65\,\text{A}
+\end{equation}
+
+\begin{equation}
+    P = (6{,}57\,\text{A})^2 \times 30\,\Omega = 1294\,\text{W}
+\end{equation}
+
+\begin{equation}
+    S = 203\,\text{V} \times 6{,}57\,\text{A} = 1334\,\text{VA}
+\end{equation}
+
+\begin{equation}
+    P_{DC} = 182\,\text{V} \times 6{,}07\,\text{A} = 1105\,\text{W}
+\end{equation}
+
+\begin{equation}
+    fp = \frac{1294\,\text{W}}{1334\,\text{VA}} = 0{,}970
+\end{equation}
+
+\begin{equation}
+    \eta = \frac{1105\,\text{W}}{1334\,\text{VA}} = 0{,}828
+\end{equation}
+
+\begin{equation}
+    FR_V = \frac{89{,}9\,\text{V}}{182\,\text{V}} = 0{,}494
+\end{equation}
+
+\begin{equation}
+    FR_I = \frac{2{,}52\,\text{A}}{6{,}07\,\text{A}} = 0{,}415
+\end{equation}
+
+\textbf{Comparación teórica vs. simulación:}
+\begin{itemize}
+    \item Los errores entre valores calculados y simulados se mantienen por debajo del
+    5\,\% en todos los parámetros, indicando buena concordancia entre el modelo teórico
+    y el circuito simulado.
+    \item Las mayores diferencias se presentan en las potencias ($P$, $S$, $P_{DC}$),
+    lo cual es esperable debido a la caída de tensión directa de los diodos
+    (aprox.\ 0,700\,V c/u), no incluida en el modelo ideal.
+    \item El factor de rizado de corriente ($\approx 0{,}409$) es menor que el de tensión
+    ($\approx 0{,}487$), confirmando el efecto de filtrado de la inductancia de 24{,}0\,mH.
+    \item La eficiencia de rectificación cercana al 83{,}0\,\% y el factor de potencia
+    cercano a 0,968 indican un excelente desempeño del rectificador tipo puente.
+\end{itemize}
+
+\begin{table}[h]
+\centering
+\begin{tabular}{|l|c|c|c|}
+\hline
+\textbf{Parámetro} & \textbf{Valor calculado} & \textbf{Valor simulado} & \textbf{Error (\%)} \\
+\hline
+$t_e$ (ms)        & No aplica & No aplica & --- \\
+$V_{DC}$ (V)      & 187    & 182 & 2{,}74 \\
+$V_{AC}$ (V)      & 91{,}0 & 89{,}9  & 1{,}22 \\
+$V_{rms}$ (V)     & 208    & 203     & 2{,}46 \\
+$I_{DC}$ (mA)     & 6230   & 6070    & 2{,}64 \\
+$I_{AC}$ (mA)     & 2550   & 2510    & 1{,}59 \\
+$I_{rms}$ (mA)    & 6730   & 6570    & 2{,}44 \\
+$I_{D,DC}$ (mA)   & 3120   & 3040    & 2{,}63\\
+$I_{D,rms}$ (mA)  & 4760   & 4650    & 2{,}37 \\
+$P$ (W)           & 1354   & 1294    & 4{,}64 \\
+$S$ (VA)          & 1399   & 1334    & 4{,}87 \\
+$fp$              & 0{,}968 & 0{,}970 & -0{,}206 \\
+$P_{DC}$ (W)      & 1165   & 1105    & 5{,}43 \\
+$\eta$            & 0{,}833 & 0{,}828 & 0{,}604 \\
+$FR_V$            & 0{,}487 & 0{,}494 & -1{,}42 \\
+$FR_I$            & 0{,}409 & 0{,}415 & -1{,}45 \\
+\hline
+\end{tabular}
+\caption{Tabla de comparación No.3 -- Ejercicio 3 (a=3, b=9, c=3)}
+\end{table}
+
+\subsection{Resultados}
+
+Valores principales obtenidos del rectificador de onda completa tipo puente:
+
+\begin{enumerate}
+    \item \textbf{Tensiones en la carga:}
+    \begin{itemize}
+        \item Tensión DC: $V_{DC} = 187\,\text{V}$
+        \item Tensión RMS: $V_{rms} = 208\,\text{V}$
+        \item Componente AC: $V_{ac} = 91{,}0\,\text{V}$
+    \end{itemize}
+
+    \item \textbf{Corrientes en la carga:}
+    \begin{itemize}
+        \item Corriente DC: $I_{DC} = 6{,}23\,\text{A} = 6230\,\text{mA}$
+        \item Corriente RMS: $I_{rms} = 6{,}73\,\text{A} = 6730\,\text{mA}$
+        \item Componente AC: $I_{ac} = 2{,}55\,\text{A} = 2550\,\text{mA}$
+    \end{itemize}
+
+    \item \textbf{Corrientes en el diodo:}
+    \begin{itemize}
+        \item Corriente DC en diodo: $I_{D,DC} = 3{,}12\,\text{A} = 3120\,\text{mA}$
+        \item Corriente RMS en diodo: $I_{D,rms} = 4{,}76\,\text{A} = 4760\,\text{mA}$
+    \end{itemize}
+
+    \item \textbf{Potencias:}
+    \begin{itemize}
+        \item Potencia activa: $P = 1354\,\text{W}$
+        \item Potencia aparente: $S = 1399\,\text{VA}$
+        \item Potencia DC: $P_{DC} = 1165\,\text{W}$
+    \end{itemize}
+
+    \item \textbf{Parámetros de calidad:}
+    \begin{itemize}
+        \item Factor de potencia: $fp = 0{,}968$
+        \item Eficiencia de rectificación: $\eta = 0{,}833 = 83{,}3\,\%$
+        \item Factor de rizado de tensión: $FR_V = 0{,}487 = 48{,}7\,\%$
+        \item Factor de rizado de corriente: $FR_I = 0{,}409 = 40{,}9\,\%$
+    \end{itemize}
+\end{enumerate}
+
+El tiempo de extinción $t_e$ no aplica para este circuito, ya que al ser un rectificador
+de onda completa tipo puente, la conducción es continua durante todo el semiciclo
+positivo y negativo de la señal de entrada.
+
+\textbf{Conclusión:} El rectificador de onda completa tipo puente con carga R-L
+(R=30{,}0\,$\Omega$, L=24{,}0\,mH) presenta un excelente desempeño, con una eficiencia del
+83{,}3\,\% y un factor de potencia de 0,968. La inductancia reduce efectivamente el
+rizado de corriente (40,9\,\%) frente al de tensión (48,3\,\%). Los errores entre los
+valores teóricos y simulados son inferiores al 5,50\,\%, validando el modelo matemático
+utilizado.
+
+\end{document}
