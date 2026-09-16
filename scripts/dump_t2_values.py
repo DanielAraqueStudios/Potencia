@@ -13,11 +13,13 @@ a, b, c = 3, 9, 3
 
 results = {}
 
-# Ex1: 3-phase 6-pulse bridge. Vf=25(a+b+c) line-to-line, f=60, R=8(a+b), L=(2b+c)mH
-VL1 = 25 * (a + b + c)
+# Ex1: 3-phase 6-pulse bridge. Vf=25(a+b+c) is the PHASE (line-to-neutral) RMS
+# voltage; the bridge is fed by the line-to-line voltage VL = Vf*sqrt(3).
+Vf1 = 25 * (a + b + c)
+VL1 = Vf1 * 3 ** 0.5
 R1 = 8 * (a + b)
 L1 = (2 * b + c) * 1e-3
-results["ex1"] = dict(VL=VL1, f=60.0, R=R1, L_mH=(2 * b + c),
+results["ex1"] = dict(Vf=Vf1, VL=VL1, f=60.0, R=R1, L_mH=(2 * b + c),
                        out=ex1_solve(VL1, 60.0, R1, L1))
 
 # Ex2: 3-phase half-wave, Vm=611V (peak phase), f=50Hz, reuse R,L from Ex1

@@ -46,13 +46,16 @@
 Circuito: puente rectificador trifásico de 6 diodos (Figura 1), alimentado por
 un sistema trifásico balanceado, con carga R-L.
 
-\textbf{Datos:} $V_f=25(a+b+c)=25(3+9+3)=375\,\text{V}$ (tensión línea-línea rms),
+\textbf{Datos:} $V_f=25(a+b+c)=25(3+9+3)=375\,\text{V}$ (tensión de fase, línea-neutro, rms).
+El puente de 6 pulsos rectifica las tensiones línea-línea, por lo que la tensión
+que efectivamente alimenta el puente es
+$V_L=V_f\sqrt3=375\,\text{V}(1{,}732)=649{,}5\,\text{V}$.
 $f=60{,}0\,\text{Hz}$, $R=8(a+b)=8(12)=96{,}0\,\Omega$, $L=(2b+c)=(18+3)=21{,}0\,\text{mH}$.
 
 \subsection{Procedimiento}
 
 \begin{equation}
-    V_m = 375\,\text{V}\times\sqrt{2} = 530\,\text{V}
+    V_m = 649{,}5\,\text{V}\times\sqrt{2} = 918{,}4\,\text{V}
 \end{equation}
 
 \begin{equation}
@@ -61,16 +64,16 @@ $f=60{,}0\,\text{Hz}$, $R=8(a+b)=8(12)=96{,}0\,\Omega$, $L=(2b+c)=(18+3)=21{,}0\
 
 \textbf{Componente DC (integración $-\pi/6$ a $\pi/6$):}
 \begin{equation}
-    V_{DC} = \frac{1}{\pi/3\,\text{rad}}\int_{-\pi/6\,\text{rad}}^{\pi/6\,\text{rad}} 530\,\text{V}\cos\theta\,d\theta
-    = \frac{3(530\,\text{V})}{\pi}\left[\sin\frac{\pi}{6}-\sin\left(-\frac{\pi}{6}\right)\right]
+    V_{DC} = \frac{1}{\pi/3\,\text{rad}}\int_{-\pi/6\,\text{rad}}^{\pi/6\,\text{rad}} 918{,}4\,\text{V}\cos\theta\,d\theta
+    = \frac{3(918{,}4\,\text{V})}{\pi}\left[\sin\frac{\pi}{6}-\sin\left(-\frac{\pi}{6}\right)\right]
 \end{equation}
 
 \begin{equation}
-    \boxed{V_{DC} = 506\,\text{V}}
+    \boxed{V_{DC} = 877\,\text{V}}
 \end{equation}
 
 \begin{equation}
-    I_{DC} = \frac{506\,\text{V}}{96{,}0\,\Omega} = \boxed{5{,}28\,\text{A}}
+    I_{DC} = \frac{877\,\text{V}}{96{,}0\,\Omega} = \boxed{9{,}14\,\text{A}}
 \end{equation}
 
 \textbf{Armónico dominante $n=1$, $m=6$, $f_6=360\,\text{Hz}$:}
@@ -82,51 +85,51 @@ $f=60{,}0\,\text{Hz}$, $R=8(a+b)=8(12)=96{,}0\,\Omega$, $L=(2b+c)=(18+3)=21{,}0\
     Z_6 = 96{,}0\,\Omega + j(2262\,\text{rad/s})(0{,}021\,\text{H}) = 96{,}0\,\Omega + j47{,}5\,\Omega
 \end{equation}
 
-Con la amplitud del armónico 6 obtenida por integración de $530\cos\theta\cos(6\theta)$
+Con la amplitud del armónico 6 obtenida por integración de $918{,}4\cos\theta\cos(6\theta)$
 en $[-\pi/6,\pi/6]$ (calculada numéricamente en \texttt{scripts/rectifiers/ex1\_bridge\_rl.py}),
 el aporte de ondulación resultante es pequeño frente a la componente DC, consistente
 con el bajo factor de rizado obtenido en el Paso siguiente.
 
 \textbf{Valores RMS, corrientes de línea y de diodo:}
 \begin{equation}
-    V_{rms} = \boxed{506{,}8\,\text{V}}, \qquad I_{rms} = \boxed{5{,}28\,\text{A}}
+    V_{rms} = \boxed{877{,}9\,\text{V}}, \qquad I_{rms} = \boxed{9{,}14\,\text{A}}
 \end{equation}
 
 \begin{equation}
-    I_L = I_{DC}\sqrt{2/3} = 5{,}28\,\text{A}\,(0{,}8165) = \boxed{4{,}31\,\text{A}}
+    I_L = I_{DC}\sqrt{2/3} = 9{,}14\,\text{A}\,(0{,}8165) = \boxed{7{,}46\,\text{A}}
 \end{equation}
 
 \begin{equation}
-    I_{D,DC} = \frac{I_{DC}}{\sqrt3} = \frac{5{,}28\,\text{A}}{1{,}732} = \boxed{3{,}05\,\text{A}},
-    \qquad I_{D,rms} = \boxed{3{,}05\,\text{A}}
+    I_{D,DC} = \frac{I_{DC}}{\sqrt3} = \frac{9{,}14\,\text{A}}{1{,}732} = \boxed{5{,}28\,\text{A}},
+    \qquad I_{D,rms} = \boxed{5{,}28\,\text{A}}
 \end{equation}
 
 \textbf{Potencia, factor de potencia, eficiencia, factores de rizado:}
 \begin{equation}
-    P = I_{rms}^2 R = (5{,}28\,\text{A})^2(96{,}0\,\Omega) = \boxed{2675\,\text{W}}
+    P = I_{rms}^2 R = (9{,}14\,\text{A})^2(96{,}0\,\Omega) = \boxed{8025\,\text{W}}
 \end{equation}
 
 \begin{equation}
-    S = \sqrt3\,V_f\,I_L = \sqrt3\,(375\,\text{V})(4{,}31\,\text{A}) = \boxed{2798\,\text{VA}}
+    S = \sqrt3\,V_L\,I_L = \sqrt3\,(649{,}5\,\text{V})(7{,}46\,\text{A}) = \boxed{8393\,\text{VA}}
 \end{equation}
 
 \begin{equation}
-    fp = \frac{2675\,\text{W}}{2798\,\text{VA}} = \boxed{0{,}956}
+    fp = \frac{8025\,\text{W}}{8393\,\text{VA}} = \boxed{0{,}956}
 \end{equation}
 
 \begin{equation}
-    \eta = \frac{P_{DC}}{S} = \frac{2672\,\text{W}}{2798\,\text{VA}} = \boxed{0{,}955}
+    \eta = \frac{P_{DC}}{S} = \frac{8015\,\text{W}}{8393\,\text{VA}} = \boxed{0{,}955}
 \end{equation}
 
 \begin{equation}
-    FR_V = \frac{20{,}5\,\text{V}}{506\,\text{V}} = \boxed{0{,}0404}, \qquad
-    FR_I = \frac{0{,}191\,\text{A}}{5{,}28\,\text{A}} = \boxed{0{,}0362}
+    FR_V = \frac{35{,}4\,\text{V}}{877\,\text{V}} = \boxed{0{,}0404}, \qquad
+    FR_I = \frac{0{,}331\,\text{A}}{9{,}14\,\text{A}} = \boxed{0{,}0362}
 \end{equation}
 
 \textbf{Especificaciones del puente rectificador:} cada diodo debe soportar una
-tensión inversa de pico $PIV = V_m = 530\,\text{V}$ y una corriente eficaz
-$I_{D,rms}=3{,}05\,\text{A}$; se recomiendan diodos de $\geq 800\,\text{V}$ y
-$\geq 6\,\text{A}$ (margen de seguridad $\sim$1,5$\times$).
+tensión inversa de pico $PIV = V_m = 918{,}4\,\text{V}$ y una corriente eficaz
+$I_{D,rms}=5{,}28\,\text{A}$; se recomiendan diodos de $\geq 1400\,\text{V}$ y
+$\geq 8\,\text{A}$ (margen de seguridad $\sim$1,5$\times$).
 
 \subsection{Gráficas de las señales de salida}
 
@@ -160,14 +163,14 @@ modelo analítico; falta contrastar contra la simulación de circuito real.}
 \toprule
 \textbf{Parámetro} & \textbf{Valor} & \textbf{Unidad}\\
 \midrule
-$V_{DC}$ & 506 & V\\
-$V_{rms}$ & 506{,}8 & V\\
-$I_{DC}$ & 5{,}28 & A\\
-$I_{rms}$ & 5{,}28 & A\\
-$I_L$ & 4{,}31 & A\\
-$I_{D,rms}$ & 3{,}05 & A\\
-$P$ & 2675 & W\\
-$S$ & 2798 & VA\\
+$V_{DC}$ & 877 & V\\
+$V_{rms}$ & 877{,}9 & V\\
+$I_{DC}$ & 9{,}14 & A\\
+$I_{rms}$ & 9{,}14 & A\\
+$I_L$ & 7{,}46 & A\\
+$I_{D,rms}$ & 5{,}28 & A\\
+$P$ & 8025 & W\\
+$S$ & 8393 & VA\\
 $fp$ & 0{,}956 & --\\
 $\eta$ & 0{,}955 & --\\
 $FR_V$ & 0{,}0404 & --\\

@@ -40,8 +40,9 @@ def plot_two(t_ms, v, i, title, fname, vlabel="$v_o(t)$ [V]", ilabel="$i_o(t)$ [
     save(fig, fname)
 
 
-# --- Ex1: 3-phase 6-pulse bridge ---
-VL1, f1, R1, L1 = 375.0, 60.0, 96.0, 21e-3
+# --- Ex1: 3-phase 6-pulse bridge (Vf=375V is phase RMS; VL=Vf*sqrt(3) feeds the bridge) ---
+Vf1, f1, R1, L1 = 375.0, 60.0, 96.0, 21e-3
+VL1 = Vf1 * np.sqrt(3)
 Vm1 = VL1 * np.sqrt(2)
 w1 = 2 * np.pi * f1
 T1 = 1 / f1
