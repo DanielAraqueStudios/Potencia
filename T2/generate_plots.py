@@ -52,8 +52,10 @@ vo1 = Vm1 * np.cos(np.mod(theta + np.pi / 6, np.pi / 3) - np.pi / 6)
 io1 = vo1 / R1  # resistive approx for the plot envelope shape only; ripple dominated by R here
 plot_two(t * 1e3, vo1, io1, "Ejercicio 1: Rectificador trifásico de 6 pulsos", "ex1_waveforms.png")
 
-# --- Ex2: 3-phase half-wave ---
-Vm2, f2, R2, L2 = 611.0, 50.0, 96.0, 21e-3
+# --- Ex2: 3-phase half-wave (VL=611V is line-to-line peak; the half-wave
+# rectifier is fed by phase voltages, so Vm2 = VL/sqrt(3)) ---
+VL_ex2, f2, R2, L2 = 611.0, 50.0, 96.0, 21e-3
+Vm2 = VL_ex2 / np.sqrt(3)
 w2 = 2 * np.pi * f2
 T2p = 1 / f2
 t2 = np.linspace(0, T2p, 2000)

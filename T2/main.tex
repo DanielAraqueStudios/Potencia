@@ -184,12 +184,15 @@ $FR_I$ & 0{,}0362 & --\\
 \section{Ejercicio 2 -- Rectificador trifásico de media onda}
 
 Circuito: rectificador trifásico de media onda de 3 diodos (Figura 2), carga R-L.
-El enunciado fija $V_L=611\,\text{V}\sin(100\pi t)$ (tensión de fase pico) para
-todos los estudiantes, independiente de $a,b,c$; dado que el ejercicio no
-especifica $R$ ni $L$, se reutilizan los valores del Ejercicio 1
+El enunciado fija $V_L=611\,\text{V}\sin(100\pi t)$ (tensión línea-línea pico,
+según la etiqueta ``$V_L$'') para todos los estudiantes, independiente de
+$a,b,c$. Como el rectificador de media onda de 3 diodos es alimentado por las
+tensiones de \emph{fase} (línea-neutro), la tensión de fase pico es
+$V_m=V_L/\sqrt3=611\,\text{V}/1{,}732=352{,}8\,\text{V}$. Dado que el ejercicio
+no especifica $R$ ni $L$, se reutilizan los valores del Ejercicio 1
 ($R=96{,}0\,\Omega$, $L=21{,}0\,\text{mH}$).
 
-\textbf{Datos:} $V_m=611\,\text{V}$, $\omega=100\pi\,\text{rad/s}\Rightarrow f=50{,}0\,\text{Hz}$,
+\textbf{Datos:} $V_m=352{,}8\,\text{V}$ (fase, pico), $\omega=100\pi\,\text{rad/s}\Rightarrow f=50{,}0\,\text{Hz}$,
 $R=96{,}0\,\Omega$, $L=21{,}0\,\text{mH}$.
 
 \subsection{Procedimiento}
@@ -200,21 +203,21 @@ $120^\circ$. Para la serie de Fourier, se integra sobre el intervalo de
 conducción de una fase, $[-\pi/3,\pi/3]$ en $\theta=\omega t$:
 
 \begin{equation}
-    a_0 = V_{DC} = \frac{1}{2\pi/3\,\text{rad}}\int_{-\pi/3\,\text{rad}}^{\pi/3\,\text{rad}} 611\,\text{V}\cos\theta\,d\theta
-    = \frac{3(611\,\text{V})}{2\pi}\left[\sin\frac{\pi}{3}-\sin\left(-\frac{\pi}{3}\right)\right]
+    a_0 = V_{DC} = \frac{1}{2\pi/3\,\text{rad}}\int_{-\pi/3\,\text{rad}}^{\pi/3\,\text{rad}} 352{,}8\,\text{V}\cos\theta\,d\theta
+    = \frac{3(352{,}8\,\text{V})}{2\pi}\left[\sin\frac{\pi}{3}-\sin\left(-\frac{\pi}{3}\right)\right]
 \end{equation}
 
 \begin{equation}
-    \boxed{V_{DC} = 505\,\text{V}}
+    \boxed{V_{DC} = 292\,\text{V}}
 \end{equation}
 
 \begin{equation}
-    I_{DC} = \frac{505\,\text{V}}{96{,}0\,\Omega} = \boxed{5{,}26\,\text{A}}
+    I_{DC} = \frac{292\,\text{V}}{96{,}0\,\Omega} = \boxed{3{,}04\,\text{A}}
 \end{equation}
 
 \textbf{Armónico $n=1$ ($m=6$, $f_6=300\,\text{Hz}$):}
 \begin{equation}
-    a_6 = \frac{2}{2\pi/3\,\text{rad}}\int_{-\pi/3\,\text{rad}}^{\pi/3\,\text{rad}} 611\,\text{V}\cos\theta\cos(6\theta)\,d\theta,
+    a_6 = \frac{2}{2\pi/3\,\text{rad}}\int_{-\pi/3\,\text{rad}}^{\pi/3\,\text{rad}} 352{,}8\,\text{V}\cos\theta\cos(6\theta)\,d\theta,
     \qquad b_6 = 0\,\text{V}
 \end{equation}
 
@@ -228,33 +231,33 @@ método del Ejercicio 2 de \texttt{diferent\_values.txt}).
 
 \textbf{Funciones de salida (forma general):}
 \begin{equation}
-    v_o(t) = \underbrace{505\,\text{V}}_{DC} + \underbrace{a_6\cos(1885\,\text{rad/s}\cdot t)}_{AC} + \cdots
+    v_o(t) = \underbrace{292\,\text{V}}_{DC} + \underbrace{a_6\cos(1885\,\text{rad/s}\cdot t)}_{AC} + \cdots
 \end{equation}
 \begin{equation}
-    i_o(t) = \underbrace{5{,}26\,\text{A}}_{DC} + \underbrace{|I_6|\cos(1885\,\text{rad/s}\cdot t - \angle Z_6)}_{AC} + \cdots
+    i_o(t) = \underbrace{3{,}04\,\text{A}}_{DC} + \underbrace{|I_6|\cos(1885\,\text{rad/s}\cdot t - \angle Z_6)}_{AC} + \cdots
 \end{equation}
 
 \textbf{RMS, potencias y factores de calidad:}
 \begin{equation}
-    V_{rms} = \boxed{505{,}7\,\text{V}}, \qquad I_{rms} = \boxed{5{,}27\,\text{A}}
+    V_{rms} = \boxed{292{,}0\,\text{V}}, \qquad I_{rms} = \boxed{3{,}04\,\text{A}}
 \end{equation}
 
 \begin{equation}
-    I_L = I_D = \frac{I_{DC}}{\sqrt3} = \frac{5{,}26\,\text{A}}{1{,}732} = \boxed{3{,}04\,\text{A}}
+    I_L = I_D = \frac{I_{DC}}{\sqrt3} = \frac{3{,}04\,\text{A}}{1{,}732} = \boxed{1{,}75\,\text{A}}
 \end{equation}
 
 \begin{equation}
-    P = I_{rms}^2R = (5{,}27\,\text{A})^2(96{,}0\,\Omega) = \boxed{2663\,\text{W}}
+    P = I_{rms}^2R = (3{,}04\,\text{A})^2(96{,}0\,\Omega) = \boxed{888\,\text{W}}
 \end{equation}
 
 \begin{equation}
-    V_L = \sqrt3\,V_f = \sqrt3(432\,\text{V}) = 748\,\text{V}, \qquad
-    S = \sqrt3\,V_L\,I_L = \sqrt3(748\,\text{V})(3{,}04\,\text{A}) = \boxed{3939\,\text{VA}}
+    V_L = \sqrt3\,V_f = \sqrt3(249{,}4\,\text{V}) = 432{,}0\,\text{V}, \qquad
+    S = \sqrt3\,V_L\,I_L = \sqrt3(432{,}0\,\text{V})(1{,}75\,\text{A}) = \boxed{1313\,\text{VA}}
 \end{equation}
 
 \begin{equation}
-    fp = \frac{2663\,\text{W}}{3939\,\text{VA}} = \boxed{0{,}676}, \qquad
-    \eta = \frac{P_{DC}}{S} = \frac{2660\,\text{W}}{3939\,\text{VA}} = \boxed{0{,}675}
+    fp = \frac{888\,\text{W}}{1313\,\text{VA}} = \boxed{0{,}676}, \qquad
+    \eta = \frac{P_{DC}}{S} = \frac{887\,\text{W}}{1313\,\text{VA}} = \boxed{0{,}675}
 \end{equation}
 
 \begin{equation}
@@ -277,7 +280,7 @@ io2 = vo2 / R2
 \subsection{Simulación}
 
 \textit{Pendiente: simulación en LTspice/Simulink del rectificador trifásico de
-media onda con $V_m=611\,\text{V}$, $f=50{,}0\,\text{Hz}$, $R=96{,}0\,\Omega$,
+media onda con $V_m=352{,}8\,\text{V}$ (fase, pico), $f=50{,}0\,\text{Hz}$, $R=96{,}0\,\Omega$,
 $L=21{,}0\,\text{mH}$. El modelo analítico fue contrastado contra integración
 numérica independiente de la ODE del circuito (ver
 \texttt{tests/test\_ex2\_three\_phase\_hw.py}), con acuerdo dentro de 2--5\,\%;
@@ -291,13 +294,13 @@ falta la verificación contra un simulador de circuitos real.}
 \toprule
 \textbf{Parámetro} & \textbf{Valor} & \textbf{Unidad}\\
 \midrule
-$V_{DC}$ & 505 & V\\
-$V_{rms}$ & 505{,}7 & V\\
-$I_{DC}$ & 5{,}26 & A\\
-$I_{rms}$ & 5{,}27 & A\\
-$I_L=I_D$ & 3{,}04 & A\\
-$P$ & 2663 & W\\
-$S$ & 3939 & VA\\
+$V_{DC}$ & 292 & V\\
+$V_{rms}$ & 292{,}0 & V\\
+$I_{DC}$ & 3{,}04 & A\\
+$I_{rms}$ & 3{,}04 & A\\
+$I_L=I_D$ & 1{,}75 & A\\
+$P$ & 888 & W\\
+$S$ & 1313 & VA\\
 $fp$ & 0{,}676 & --\\
 $\eta$ & 0{,}675 & --\\
 \bottomrule

@@ -22,10 +22,13 @@ L1 = (2 * b + c) * 1e-3
 results["ex1"] = dict(Vf=Vf1, VL=VL1, f=60.0, R=R1, L_mH=(2 * b + c),
                        out=ex1_solve(VL1, 60.0, R1, L1))
 
-# Ex2: 3-phase half-wave, Vm=611V (peak phase), f=50Hz, reuse R,L from Ex1
-Vm2 = 611.0
+# Ex2: 3-phase half-wave, VL=611V (peak, LINE-TO-LINE per the "VL" label in the
+# statement); the half-wave rectifier is fed by phase voltages, so
+# Vm_phase = VL/sqrt(3). f=50Hz, reuse R,L from Ex1.
+VL2 = 611.0
+Vm2 = VL2 / 3 ** 0.5
 Vf2 = Vm2 / (2 ** 0.5)
-results["ex2"] = dict(Vf=Vf2, Vm=Vm2, f=50.0, R=R1, L_mH=(2 * b + c),
+results["ex2"] = dict(VL=VL2, Vf=Vf2, Vm=Vm2, f=50.0, R=R1, L_mH=(2 * b + c),
                        out=ex2_solve(Vf2, 50.0, R1, L1))
 
 # Ex3: SCR half-wave, Vm=20(a+b), f=60, R=2(a+b+c), L=45mH, alpha=(4a+3c+8)deg
