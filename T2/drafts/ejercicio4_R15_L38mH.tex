@@ -1,0 +1,145 @@
+\documentclass[11pt]{article}
+\usepackage[spanish]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{geometry}
+\geometry{margin=2.5cm}
+
+\title{Ejercicio 4 (variante) --- Rectificador controlado\\ R = 15\,$\Omega$, L = 38\,mH}
+\author{}
+\date{}
+
+\begin{document}
+\maketitle
+
+Basado en el ejercicio 4 (rectificador controlado tipo puente, alimentado con
+$V_s = 250\,\sen(120\pi t)$ V, $\alpha = 20^\circ$), resuelto con
+$R = 15\,\Omega$ y $L = 38$\,mH.
+
+\section*{Datos}
+
+\begin{align*}
+V_s &= 250\,\sen(120\pi t)\ \text{V} \\
+\alpha &= 20^\circ = 0{,}349\ \text{rad} \\
+\pi+\alpha &= 3{,}491\ \text{rad} \\
+R &= 15\ \Omega \\
+L &= 38\ \text{mH}
+\end{align*}
+
+\section*{Impedancia de carga y corriente forzada}
+
+\begin{align*}
+\omega L &= 120\pi \cdot 0{,}038 = 14{,}326\ \Omega \\
+Z &= 15 + j14{,}326 = 20{,}7419\ \Omega \angle 0{,}7624\ \text{rad } (43{,}6827^\circ) \\
+I_f &= \frac{250\angle 0}{20{,}7419\angle 0{,}7624} = 12{,}0529\ \text{A} \angle{-0{,}7624} \\
+i(t) &= 12{,}0529\,\sen(120\pi t - 0{,}7624) + I_o\,e^{-t/\tau}
+\end{align*}
+
+\section*{a) Tipo de corriente}
+
+\begin{align*}
+\tau &= \frac{0{,}038}{15} = 2{,}533\ \text{ms} \quad \Rightarrow \quad \frac{1}{\tau} = 394{,}7\ \text{s}^{-1} \\
+t_1 &= \frac{0{,}349}{120\pi} = 0{,}9258\ \text{ms}
+\end{align*}
+
+Condici\'on inicial ($i(t_1)=0$):
+\begin{align*}
+0 &= 12{,}0529\,\sen(0{,}349066 - 0{,}7624) + I_o \\
+I_o &= 4{,}8413\ \text{A}
+\end{align*}
+
+Condici\'on final (cruce por cero despu\'es de $\pi+\alpha$):
+\begin{align*}
+0 &= 12{,}0529\,\sen(120\pi\,t_c - 0{,}7624) + 4{,}8413\,e^{-394{,}7(t_c - 0{,}000926)} \\
+t_c &\approx 10{,}38\ \text{ms} \\
+\beta &= 120\pi \cdot 0{,}01038 = 3{,}91\ \text{rad}
+\end{align*}
+
+Como $\beta = 3{,}91\ \text{rad} > \pi+\alpha = 3{,}49\ \text{rad}$
+$\Rightarrow$ \textbf{la corriente es continua}.
+
+\section*{b) Corrientes y tensiones DC y RMS}
+
+\paragraph{Para n=0, f=0 (componente DC):}
+\begin{align*}
+V_{DC} &= \frac{1}{\pi}\int_{\pi/9}^{3{,}49\ \text{rad}} 250\,\sen(\theta)\,d\theta
+       = \frac{250}{\pi}\Big[-\cos(\theta)\Big]_{\pi/9}^{3{,}49\ \text{rad}}
+       = \frac{250}{\pi}\big[-\cos(3{,}49)+\cos(\pi/9)\big] = 149{,}6\ \text{V} \\
+I_{DC} &= \frac{V_{DC}}{R} = \frac{149{,}6}{15} = 9{,}97\ \text{A}
+\end{align*}
+
+\paragraph{Para n=2, f=120Hz:}
+\begin{align*}
+Z_2 &= 15 + j240\pi\ \text{rad/s}\cdot(0{,}038) = 32{,}34\ \Omega\angle 1{,}089 \\
+a_2 &= \frac{2(250)}{\pi}\left[\frac{\cos(3\pi/9)}{3} - \frac{\cos(\pi/9)}{1}\right] = -123\ \text{V} \\
+b_2 &= \frac{2(250)}{\pi}\left[\frac{\sen(3\pi/9)}{3} - \frac{\sen(\pi/9)}{1}\right] = -8{,}49\ \text{V} \\
+V_2 &= \sqrt{(-123)^2+(-8{,}49)^2} = 123{,}3\ \text{V} \\
+|I_2| &= \frac{123{,}3}{32{,}34} = 3{,}81\ \text{A}
+\end{align*}
+
+Los dem\'as $a_n, b_n$ ($n=4,6,8,10,12,14$) se obtienen igual, cambiando $(n+1)$
+y $(n-1)$; son iguales a los del ejercicio base porque $V_{DC}$, $a_n$, $b_n$
+solo dependen de $V_s$ y $\alpha$, no de $R$ ni $L$. Con $Z_n = 15 + j\,n\cdot120\pi\cdot0{,}038$
+se arma la tabla:
+
+\begin{center}
+\begin{tabular}{c c c c c c}
+$n$ & $a_n$ (V) & $b_n$ (V) & $V_n$ (V) & $Z_n$ ($\Omega\angle$rad) & $I_n$ (A) \\ \hline
+0 & --- & --- & 149{,}6 & 15 & $I_{DC}=9{,}97$ \\
+2 & $-123$ & $-8{,}49$ & 123{,}3 & $32{,}34\angle1{,}089$ & 3{,}81 \\
+4 & $-32{,}1$ & $-14{,}6$ & 35{,}3 & $59{,}24\angle1{,}315$ & 0{,}596 \\
+6 & $-11{,}9$ & $-16{,}7$ & 20{,}5 & $87{,}26\angle1{,}397$ & 0{,}235 \\
+8 & $-0{,}266$ & $-14{,}6$ & 14{,}6 & $115{,}6\angle1{,}441$ & 0{,}126 \\
+10 & 6{,}60 & $-9{,}3$ & 11{,}4 & $144{,}1\angle1{,}466$ & 0{,}0791 \\
+12 & 8{,}96 & $-2{,}76$ & 9{,}38 & $172{,}6\angle1{,}484$ & 0{,}0544 \\
+14 & 7{,}43 & 2{,}87 & 7{,}97 & $201{,}1\angle1{,}496$ & 0{,}0396 \\
+\end{tabular}
+\end{center}
+
+Tensiones (iguales al problema base):
+\begin{align*}
+V_{DC} &= 149{,}6\ \text{V} \\
+V_{RMS} &= \sqrt{149{,}6^2 + \tfrac{1}{2}\left(123{,}3^2+35{,}3^2+20{,}5^2+14{,}6^2+11{,}4^2+9{,}38^2+7{,}97^2\right)} = 176{,}2\ \text{V}
+\end{align*}
+
+Corrientes (con $R=15\,\Omega$, $L=38$\,mH):
+\begin{align*}
+I_{DC} &= 9{,}97\ \text{A} \\
+I_{RMS} &= \sqrt{9{,}97^2 + \tfrac{1}{2}\left(3{,}81^2+0{,}596^2+0{,}235^2+0{,}126^2+0{,}0791^2+0{,}0544^2+0{,}0396^2\right)} = 10{,}34\ \text{A}
+\end{align*}
+
+\section*{c) Potencias}
+
+\begin{align*}
+P &= I_{RMS}^2\,R = 10{,}34^2 \cdot 15 = 1604{,}2\ \text{W} \\
+P_{DC} &= V_{DC}\,I_{DC} = 149{,}6 \cdot 9{,}97 = 1492{,}0\ \text{W} \\
+S &= V_{s,RMS}\,I_{RMS} = 177 \cdot 10{,}34 = 1830{,}2\ \text{VA}
+\end{align*}
+
+\section*{d) Factor de potencia y eficiencia}
+
+\begin{align*}
+FP &= \frac{P}{S} = \frac{1604{,}2}{1830{,}2} = 0{,}877 \\
+\eta &= \frac{P_{DC}}{S} = \frac{1492{,}0}{1830{,}2} = 0{,}815
+\end{align*}
+
+\section*{e) Factores de rizo}
+
+\begin{align*}
+FRV &= \frac{\sqrt{176{,}2^2 - 149{,}6^2}}{149{,}6} = 0{,}622 \\
+FRI &= \frac{\sqrt{10{,}34^2 - 9{,}97^2}}{9{,}97} = 0{,}274
+\end{align*}
+
+\section*{Expresiones finales}
+
+\begin{align*}
+v(t) &= 149{,}6 - 123\cos(240\pi t) - 8{,}49\sen(240\pi t) - 32{,}1\cos(480\pi t) \\
+&\quad - 14{,}6\sen(480\pi t) - 11{,}9\cos(720\pi t) - 16{,}7\sen(720\pi t) + \cdots
+\end{align*}
+
+\begin{align*}
+i(t) &= 9{,}97 - 3{,}80\cos(240\pi t - 1{,}089) - 0{,}262\sen(240\pi t - 1{,}089) \\
+&\quad - 0{,}542\cos(480\pi t - 1{,}315) - 0{,}246\sen(480\pi t - 1{,}315) + \cdots
+\end{align*}
+
+\end{document}

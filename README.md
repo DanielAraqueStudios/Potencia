@@ -6,23 +6,27 @@ solver library, and the LaTeX report for the T2 assignment.
 ## Structure
 
 ```
-T2.pdf                     Assignment statement (5 rectifier exercises)
+docs/
+  assignment/              T2.pdf (statement), T2Clase.pdf (class notes)
+  templates/               PlantillaEP.pdf (delivery guide), sample.tex
+  examples/Main_report_2/  Earlier reference solution (report format)
 T2/
-  main.tex                 LaTeX report (a=3, b=9, c=3), ready for Overleaf
-  images/                  Generated waveform plots referenced by main.tex
-  generate_plots.py        Regenerates the images from the verified solvers
+  main.tex                 LaTeX report (a=3, b=9, c=3)
+  generate_plots.py        Regenerates images/ex*_waveforms.png from the solvers
+  images/                  Figures used by main.tex and solutions/
+  solutions/               One .tex per exercise (taller_potencia_ej4/ej5)
+  reference/               Velandia exercises 2 and 3 (study version) + formula sheet
+  matlab/                  MATLAB scripts for exercise 5 (plots and simulation)
+  simulink/                SCR_Puente_P5 Simscape model (.slx.zip) and screenshot
+  drafts/                  Earlier R=15/L=38mH variants of exercises 4 and 5
+Lab/Lab3/
+  docs/                    Lab guide (controlled single-phase AC-DC converter)
+  firmware/                ESP32-S3 Arduino sketch (zero-cross + SCR firing pulse)
+  gui/                     PyQt6 serial GUI (python gui_disparo_scr.py)
 scripts/
   dump_t2_values.py        Prints all T2 numeric results as JSON
-  rectifiers/
-    ex1_bridge_rl.py            Three-phase 6-pulse full-bridge rectifier
-    ex2_three_phase_hw.py       Three-phase half-wave rectifier
-    ex3_scr_hw_rl.py            Single-phase SCR half-wave controlled rectifier
-    ex4_fullwave_controlled_rl.py  Single-phase full-wave controlled rectifier
-tests/
-  test_ex1..ex4_*.py        Pytest suites for each module
-  conftest.py               Shared randomized-parameter fixtures
-Main_report_2/, sample/    Earlier reference solutions used to match the
-                            required derivation/report format
+  rectifiers/              Verified Python solvers (ex1..ex4)
+tests/                     Pytest suites for each solver module
 ```
 
 ## Solver library
@@ -55,5 +59,14 @@ python T2/generate_plots.py
 
 ## Compiling the report
 
-`T2/main.tex` is self-contained with `T2/images/` — upload the `T2/` folder
+`T2/main.tex` uses `T2/images/` (run `generate_plots.py` first) — upload the `T2/` folder
 to Overleaf (or compile locally with `pdflatex`/`latexmk`) to build the PDF.
+
+## Lab 3 GUI
+
+```bash
+pip install PyQt6 pyserial
+python Lab/Lab3/gui/gui_disparo_scr.py
+```
+
+Diagnostics are written to `Lab/Lab3/gui/gui_disparo_scr.log` (git-ignored).

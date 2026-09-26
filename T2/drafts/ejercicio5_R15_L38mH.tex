@@ -1,0 +1,116 @@
+\documentclass[11pt]{article}
+\usepackage[spanish]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{geometry}
+\geometry{margin=2.5cm}
+
+\title{Ejercicio 5 (variante) --- Rectificador controlado\\ R = 15\,$\Omega$, L = 38\,mH, $\alpha=85^\circ$}
+\author{}
+\date{}
+
+\begin{document}
+\maketitle
+
+Mismo circuito y fuente del ejercicio 5 ($V_s = 200\,\sen(120\pi t)$ V,
+$\alpha=85^\circ$), resuelto con $R=15\,\Omega$ y $L=38$\,mH.
+
+\section*{Datos}
+
+\begin{align*}
+V_s &= 200\,\sen(120\pi t)\ \text{V} \\
+\alpha &= 85^\circ = \frac{17\pi}{36}\ \text{rad} = 1{,}4835\ \text{rad} \\
+\pi+\alpha &= \frac{53\pi}{36}\ \text{rad} = 4{,}625\ \text{rad} \\
+R &= 15\ \Omega \\
+L &= 38\ \text{mH} \\
+T &= \frac{1}{60} = 16{,}7\ \text{ms}
+\end{align*}
+
+\section*{Impedancia de carga y corriente forzada}
+
+\begin{align*}
+\omega L &= 120\pi \cdot 0{,}038 = 14{,}326\ \Omega \\
+Z &= 15 + j14{,}326 = 20{,}7419\ \Omega \angle 0{,}7624\ \text{rad} \\
+I_f &= \frac{200\angle 0}{20{,}7419\angle 0{,}7624} = 9{,}6423\ \text{A}\angle{-0{,}7624} \\
+i(t) &= 9{,}6423\,\sen(120\pi t - 0{,}7624) + I_o\,e^{-t/\tau}
+\end{align*}
+
+\section*{a) Tipo de corriente}
+
+\begin{align*}
+\tau &= \frac{0{,}038}{15} = 2{,}533\ \text{ms} \quad \Rightarrow \quad \frac{1}{\tau} = 394{,}7\ \text{s}^{-1} \\
+t_1 &= \frac{17\pi/36}{120\pi} = 3{,}935\ \text{ms}
+\end{align*}
+
+Condici\'on inicial ($i(t_1)=0$):
+\begin{align*}
+0 &= 9{,}6423\,\sen(1{,}4835 - 0{,}7624) + I_o \\
+I_o &= -6{,}366\ \text{A}
+\end{align*}
+
+Condici\'on final (cruce por cero, resuelta num\'ericamente):
+\begin{align*}
+0 &= 9{,}6423\,\sen(120\pi\,t_c - 0{,}7624) - 6{,}366\,e^{-394{,}7(t_c - 0{,}003935)} \\
+t_c &\approx 10{,}21\ \text{ms} \\
+\beta &= 120\pi \cdot 0{,}01021 = 3{,}849\ \text{rad}
+\end{align*}
+
+Como $\beta = 3{,}849\ \text{rad} < \pi+\alpha = 4{,}625\ \text{rad}$
+$\Rightarrow$ \textbf{la corriente es discontinua} (mismo r\'egimen que el
+ejercicio 5 original; $R=15\,\Omega$, $L=38$\,mH no alcanzan a hacerla continua).
+
+\section*{b) Corrientes y tensiones DC y RMS}
+
+Ventana de conducci\'on: $[t_1,\,t_c]=[3{,}935\ \text{ms},\,10{,}21\ \text{ms}]$
+en el tiempo, y $[\alpha,\,\beta]=[1{,}4835,\,3{,}849]$ rad en el \'angulo
+(el \'angulo de extinci\'on $\beta$ corta la conducci\'on antes de $\pi+\alpha$).
+
+\paragraph{$I_{DC}$ e $I_{RMS}$} (integraci\'on de $i(t)$ en $[t_1,t_c]$,
+resuelta anal\'iticamente/num\'ericamente ya que $i(t)$ combina un t\'ermino
+senoidal con uno exponencial):
+\begin{align*}
+I_{DC} &= \frac{2}{T}\int_{0{,}003935}^{0{,}01021}
+          \Big[9{,}6423\,\sen(120\pi t - 0{,}7624) - 6{,}366\,e^{-394{,}7(t-0{,}003935)}\Big]dt = 3{,}60\ \text{A} \\
+I_{RMS}^2 &= \frac{2}{T}\int_{0{,}003935}^{0{,}01021}
+          \Big[9{,}6423\,\sen(120\pi t - 0{,}7624) - 6{,}366\,e^{-394{,}7(t-0{,}003935)}\Big]^2 dt = 20{,}91\ \text{A}^2 \\
+I_{RMS} &= \sqrt{20{,}91} = 4{,}57\ \text{A}
+\end{align*}
+
+\paragraph{$V_{DC}$:}
+\begin{align*}
+V_{DC} &= \frac{1}{\pi}\int_{1{,}4835}^{3{,}849} 200\,\sen(\theta)\,d\theta
+       = \frac{200}{\pi}\Big[-\cos(\theta)\Big]_{1{,}4835}^{3{,}849} \\
+V_{DC} &= \frac{200}{\pi}\big[-\cos(3{,}849)+\cos(1{,}4835)\big] = \frac{200}{\pi}(0{,}7588+0{,}0867) = 53{,}8\ \text{V}
+\end{align*}
+
+\paragraph{$V_{RMS}$:}
+\begin{align*}
+V_{RMS}^2 &= \frac{1}{\pi}\int_{1{,}4835}^{3{,}849} \big[200\,\sen(\theta)\big]^2\,d\theta
+          = \frac{200^2}{\pi}\left[\frac{\theta}{2}-\frac{\sen(2\theta)}{4}\right]_{1{,}4835}^{3{,}849} \\
+V_{RMS}^2 &= \frac{40000}{\pi}\left[1{,}1826 - 0{,}2038\right] = 12462\ \text{V}^2 \\
+V_{RMS} &= \sqrt{12462} = 111{,}6\ \text{V}
+\end{align*}
+
+\section*{c) Potencias}
+
+\begin{align*}
+P &= I_{RMS}^2\,R = 20{,}91 \cdot 15 = 313{,}7\ \text{W} \\
+P_{DC} &= V_{DC}\,I_{DC} = 53{,}8 \cdot 3{,}60 = 193{,}8\ \text{W} \\
+S &= V_{s,RMS}\,I_{RMS} = 141{,}4 \cdot 4{,}57 = 646{,}6\ \text{VA}
+\end{align*}
+
+\section*{d) Factor de potencia y eficiencia}
+
+\begin{align*}
+FP &= \frac{P}{S} = \frac{313{,}7}{646{,}6} = 0{,}485 \\
+\eta &= \frac{P_{DC}}{S} = \frac{193{,}8}{646{,}6} = 0{,}300
+\end{align*}
+
+\section*{e) Factores de rizo}
+
+\begin{align*}
+FR_V &= \frac{\sqrt{111{,}6^2 - 53{,}8^2}}{53{,}8} = 1{,}82 \\
+FR_I &= \frac{\sqrt{4{,}57^2 - 3{,}60^2}}{3{,}60} = 0{,}783
+\end{align*}
+
+\end{document}

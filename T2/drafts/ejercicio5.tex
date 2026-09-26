@@ -1,0 +1,121 @@
+\documentclass[11pt]{article}
+\usepackage[spanish]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{geometry}
+\geometry{margin=2.5cm}
+
+\title{Ejercicio 5 --- Rectificador controlado\\ R = 14\,$\Omega$, L = 37\,mH, $\alpha=85^\circ$}
+\author{}
+\date{}
+
+\begin{document}
+\maketitle
+
+El rectificador controlado de la figura se alimenta con $V_s = 200\,\sen(120\pi t)$ V;
+si $\alpha=85^\circ$, determinar: a) el tipo de corriente, b) las corrientes y
+tensiones de y RMS, las potencias activa y aparente, el factor de potencia y
+los factores de rizo. Valores de $L=37$\,mH y $R=14\,\Omega$.
+
+\section*{Datos}
+
+\begin{align*}
+V_s &= 200\,\sen(120\pi t)\ \text{V} \\
+\alpha &= 85^\circ = \frac{17\pi}{36}\ \text{rad} = 1{,}484\ \text{rad} \\
+\pi+\alpha &= \frac{53\pi}{36}\ \text{rad} = 4{,}63\ \text{rad} \\
+R &= 14\ \Omega \\
+L &= 37\ \text{mH} \\
+T &= \frac{1}{60} = 16{,}7\ \text{ms}
+\end{align*}
+
+\section*{Impedancia de carga y corriente forzada}
+
+\begin{align*}
+\omega L &= 120\pi \cdot 0{,}037 = 13{,}95\ \Omega \\
+Z &= 14 + j13{,}95 = 19{,}8\ \Omega \angle 0{,}781\ \text{rad} \\
+I_f &= \frac{200\angle 0}{19{,}8\angle 0{,}781} = 10{,}1\ \text{A}\angle{-0{,}781} \\
+i(t) &= 10{,}1\,\sen(120\pi t - 0{,}781) + I_o\,e^{-t/\tau}
+\end{align*}
+
+\section*{a) Tipo de corriente}
+
+\begin{align*}
+\tau &= \frac{0{,}037}{14} = 2{,}64\ \text{ms} \quad \Rightarrow \quad \frac{1}{\tau} = 379{,}5\ \text{s}^{-1} \\
+t_1 &= \frac{17\pi/36}{120\pi} = 3{,}94\ \text{ms}
+\end{align*}
+
+Condici\'on inicial ($i(t_1)=0$):
+\begin{align*}
+0 &= 10{,}1\,\sen(1{,}484 - 0{,}781) + I_o \\
+I_o &= -6{,}51\ \text{A}
+\end{align*}
+
+Condici\'on final (cruce por cero, corriente vuelve a 0 antes de $\pi+\alpha$):
+\begin{align*}
+0 &= 10{,}1\,\sen(120\pi\,t_c - 0{,}781) - 6{,}51\,e^{-379{,}5(t_c - 0{,}00394)} \\
+t_c &\approx 10{,}3\ \text{ms} \\
+\beta &= 120\pi \cdot 0{,}0103 = 3{,}88\ \text{rad}
+\end{align*}
+
+Como $\beta = 3{,}88\ \text{rad} < \pi+\alpha = 4{,}63\ \text{rad}$
+$\Rightarrow$ \textbf{la corriente es discontinua}.
+
+\section*{b) Corrientes y tensiones DC y RMS}
+
+Al ser discontinua, la corriente solo existe en la ventana de conducci\'on
+$[t_1,\,t_c]=[3{,}94\ \text{ms},\,10{,}3\ \text{ms}]$, as\'i que $I_{DC}$ e
+$I_{RMS}$ se obtienen integrando $i(t)$ directamente en esa ventana (factor
+$2/T$ por tratarse de un solo pulso por semiciclo), y $V_{DC}$, $V_{RMS}$
+integrando $V_s\,\sen(\theta)$ en el intervalo angular de conducci\'on
+$[\alpha,\ \beta]$ (el \'angulo de extinci\'on $\beta$ corta la conducci\'on
+antes de $\pi+\alpha$).
+
+\paragraph{$I_{DC}$:}
+\begin{align*}
+I_{DC} &= \frac{2}{T}\int_{0{,}00394}^{0{,}0103}\Big[10{,}1\,\sen(120\pi t - 0{,}781) - 6{,}51\,e^{-379{,}5(t-0{,}00394)}\Big]\,dt \\
+       &= \frac{2}{0{,}0167}\int_{0{,}00394}^{0{,}0103} i(t)\,dt = 3{,}78\ \text{A}
+\end{align*}
+
+\paragraph{$I_{RMS}$:}
+\begin{align*}
+I_{RMS}^2 &= \frac{2}{T}\int_{0{,}00394}^{0{,}0103}\Big[10{,}1\,\sen(120\pi t - 0{,}781) - 6{,}51\,e^{-379{,}5(t-0{,}00394)}\Big]^2 dt = 23{,}03\ \text{A}^2 \\
+I_{RMS} &= \sqrt{23{,}03} = 4{,}80\ \text{A}
+\end{align*}
+
+\paragraph{$V_{DC}$:}
+\begin{align*}
+V_{DC} &= \frac{1}{\pi}\int_{17\pi/36}^{3{,}88} 200\,\sen(\theta)\,d\theta
+       = \frac{200}{\pi}\Big[-\cos(\theta)\Big]_{17\pi/36}^{3{,}88} \\
+V_{DC} &= \frac{200}{\pi}\left[-\cos(3{,}88)+\cos\!\left(\tfrac{17\pi}{36}\right)\right] = 52{,}63\ \text{V}
+\end{align*}
+
+\paragraph{$V_{RMS}$:}
+\begin{align*}
+V_{RMS}^2 &= \frac{1}{\pi}\int_{17\pi/36}^{3{,}88} \big[200\,\sen(\theta)\big]^2\,d\theta
+          = \frac{200^2}{\pi}\left[\frac{\theta}{2}-\frac{\sen(2\theta)}{4}\right]_{17\pi/36}^{3{,}88} \\
+V_{RMS}^2 &= \frac{(200)^2}{\pi}\left[\frac{3{,}88-\tfrac{17\pi}{36}}{2} - \frac{\sen(2\cdot 3{,}88)-\sen(2\cdot\tfrac{17\pi}{36})}{4}\right] = 12640\ \text{V}^2 \\
+V_{RMS} &= \sqrt{12640} = 112{,}43\ \text{V}
+\end{align*}
+
+\section*{c) Potencias}
+
+\begin{align*}
+P &= I_{RMS}^2\,R = 4{,}80^2 \cdot 14 = 322{,}6\ \text{W} \\
+P_{DC} &= V_{DC}\,I_{DC} = 52{,}63 \cdot 3{,}78 = 199{,}0\ \text{W} \\
+S &= V_{s,RMS}\,I_{RMS} = 141{,}4 \cdot 4{,}80 = 678{,}7\ \text{VA}
+\end{align*}
+
+\section*{d) Factor de potencia}
+
+\begin{align*}
+FP &= \frac{P}{S} = \frac{322{,}6}{678{,}7} = 0{,}475
+\end{align*}
+
+\section*{e) Factores de rizo}
+
+\begin{align*}
+FR_V &= \frac{\sqrt{112{,}43^2 - 52{,}63^2}}{52{,}63} = 1{,}89 \\
+FR_I &= \frac{\sqrt{4{,}80^2 - 3{,}78^2}}{3{,}78} = 0{,}783
+\end{align*}
+
+\end{document}

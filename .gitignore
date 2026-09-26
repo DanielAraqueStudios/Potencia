@@ -11,3 +11,7 @@ CLAUDE.md
 __pycache__/
 *.pyc
 .pytest_cache/
+
+# Logs and generated
+*.log
+T2/simulink/extracted/

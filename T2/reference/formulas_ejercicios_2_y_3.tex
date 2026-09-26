@@ -1,0 +1,117 @@
+\documentclass[9pt]{extarticle}
+\usepackage[spanish]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{multicol}
+\usepackage[a4paper,margin=1.3cm]{geometry}
+\usepackage{enumitem}
+\setlist[enumerate]{nosep,leftmargin=*,label=\arabic*.}
+\setlength{\columnsep}{0.8cm}
+\setlength{\columnseprule}{0.3pt}
+\setlength{\parindent}{0pt}
+\pagestyle{empty}
+
+\begin{document}
+
+\begin{multicols}{2}
+
+\textbf{Ejercicio 2}
+
+\begin{enumerate}
+\item $R = 8(a+b)$
+\item $L = (2b+c)$
+\item $V_f = \dfrac{V_L}{\sqrt{3}}$
+\item $T_0 = \dfrac{1}{3f}$
+\item $V_{DC} = \dfrac{1}{2\pi/3}\displaystyle\int_{\pi/6}^{5\pi/6} V_m\sen\theta\,d\theta = \dfrac{3V_m}{2\pi}\left[-\cos\theta\right]_{\pi/6}^{5\pi/6}$
+\item $I_{DC} = \dfrac{V_{DC}}{R}$
+\item $v_o(\theta) = V_m\cos\theta,\ \ -\dfrac{\pi}{3}\le\theta\le\dfrac{\pi}{3}$
+\item $a_0 = \dfrac{1}{2\pi/3}\displaystyle\int_{-\pi/3}^{\pi/3} V_m\cos\theta\,d\theta = \dfrac{3V_m}{2\pi}\left[\sen\theta\right]_{-\pi/3}^{\pi/3}$
+\item $\begin{aligned}
+a_n &= \dfrac{3}{\pi}\displaystyle\int_{-\pi/3}^{\pi/3} V_m\cos\theta\cos(n\theta)\,d\theta \\
+\cos\theta\cos(n\theta) &= \dfrac{1}{2}\left[\cos((n+1)\theta)+\cos((n-1)\theta)\right] \\
+a_n &= \dfrac{3V_m}{2\pi}\Big[\dfrac{\sen((n+1)\theta)}{n+1} \\
+&\quad +\dfrac{\sen((n-1)\theta)}{n-1}\Big]_{-\pi/3}^{\pi/3} \\
+a_n &= \dfrac{3V_m}{\pi}\Big[\dfrac{\sen((n+1)\pi/3)}{n+1} \\
+&\quad +\dfrac{\sen((n-1)\pi/3)}{n-1}\Big]
+\end{aligned}$
+\item $\begin{aligned}
+b_n &= \dfrac{3}{\pi}\displaystyle\int_{-\pi/3}^{\pi/3} V_m\cos\theta\sen(n\theta)\,d\theta \\
+\cos\theta\sen(n\theta) &= \dfrac{1}{2}\left[\sen((n+1)\theta)+\sen((n-1)\theta)\right] \\
+b_n &= -\dfrac{3V_m}{2\pi}\Big[\dfrac{\cos((n+1)\theta)}{n+1} \\
+&\quad +\dfrac{\cos((n-1)\theta)}{n-1}\Big]_{-\pi/3}^{\pi/3} \\
+b_n &= 0
+\end{aligned}$
+\item $V_n = \sqrt{a_n^2 + b_n^2}$
+\item $Z_n = R + j\,n\omega L$
+\item $I_n = \dfrac{V_n\angle 0}{Z_n}$
+\item $I_{rms} = \sqrt{I_{DC}^2 + \dfrac{I_n^2}{2}}$
+\item $V_{rms} = \sqrt{V_{DC}^2 + \dfrac{V_n^2}{2}}$
+\item $I_L = \dfrac{I_{rms}}{\sqrt{3}}$
+\item $V_{f,rms} = \dfrac{V_f}{\sqrt{2}}$
+\item $S = 3\,V_{f,rms}\,I_L$
+\item $P = I_{rms}^2\,R$
+\item $P_{DC} = V_{DC}\,I_{DC}$
+\item $f_p = \dfrac{P}{S}$
+\item $\eta = \dfrac{P_{DC}}{P}$
+\item $FR_V = \dfrac{V_n/\sqrt{2}}{V_{DC}}$
+\item $FR_I = \dfrac{I_n/\sqrt{2}}{I_{DC}}$
+\item $I_{D,rms} = \dfrac{I_{rms}}{\sqrt{3}}$
+\item $v_o(t) = V_{DC} + V_n\cos(n\omega t)$
+\item $i_o(t) = I_{DC} + I_n\cos(n\omega t - \varphi_n)$
+\item $FR = \dfrac{\sqrt{RMS^2 - DC^2}}{DC}$
+\item $Error\,\% = \dfrac{|V_{calc} - V_{sim}|}{V_{calc}}\times 100$
+\end{enumerate}
+
+\vspace{4pt}
+\textbf{Ejercicio 3}
+
+\begin{enumerate}
+\item $\tau = \dfrac{L}{R}$
+\item $\dfrac{1}{\tau} = \dfrac{R}{L}$
+\item $\alpha_{rad} = \alpha_{grados}\cdot\dfrac{\pi}{180^\circ}$
+\item $\omega = 2\pi f$
+\item $t_1 = \dfrac{\alpha}{\omega}$
+\item $Z = R + j\omega L$
+\item $|Z| = \sqrt{R^2 + (\omega L)^2}$
+\item $\varphi = \tan^{-1}\!\left(\dfrac{\omega L}{R}\right)$
+\item $I_m = \dfrac{V_m}{|Z|}$
+\item $i(t) = I_m\sen(\omega t - \varphi) + I_0\,e^{-(t-t_1)/\tau}$
+\item $I_0 = -I_m\sen(\omega t_1 - \varphi)$
+\item $0 = I_m\sen(\omega t_e - \varphi) + I_0\,e^{-(t_e-t_1)/\tau}$
+\item $X = \dfrac{\pi + \varphi}{\omega}$
+\item $\beta = \omega\,t_e$
+\item $V_{DC} = \dfrac{1}{2\pi}\displaystyle\int_{\alpha}^{\beta} V_m\sen\theta\,d\theta = \dfrac{V_m}{2\pi}\left[\cos\alpha - \cos\beta\right]$
+\item $V_{RMS}^2 = \dfrac{1}{2\pi}\displaystyle\int_{\alpha}^{\beta}\left(V_m\sen\theta\right)^2 d\theta = \dfrac{V_m^2}{2\pi}\left[\dfrac{\theta}{2} - \dfrac{\sen 2\theta}{4}\right]_{\alpha}^{\beta}$
+\item $V_{RMS} = \sqrt{V_{RMS}^2}$
+\item $T = \dfrac{1}{f}$
+\item $I_{DC} = \dfrac{1}{T}\displaystyle\int_{t_1}^{t_e} i(t)\,dt$
+\item $\begin{aligned}
+I_{RMS}^2 &= \dfrac{1}{T}\displaystyle\int_{t_1}^{t_e} i^2(t)\,dt \\
+i^2(t) &= I_m^2\sen^2(\omega t-\varphi) \\
+&\quad + 2I_mI_0\sen(\omega t-\varphi)e^{-(t-t_1)/\tau} \\
+&\quad + I_0^2e^{-2(t-t_1)/\tau} \\
+I_{RMS}^2 &= \dfrac{1}{T}(A+B+C) \\
+A &= I_m^2\displaystyle\int\sen^2(\omega t-\varphi)\,dt,\ \ \sen^2x=\dfrac{1-\cos 2x}{2} \\
+A &= I_m^2\Big[\dfrac{t}{2}-\dfrac{\sen(2(\omega t-\varphi))}{4\omega}\Big]_{t_1}^{t_e} \\
+B &= 2I_mI_0\displaystyle\int e^{-(t-t_1)/\tau}\sen(\omega t-\varphi)\,dt \\
+B &= 2I_mI_0\Big[\dfrac{e^{-(t-t_1)/\tau}\left(-\frac{1}{\tau}\sen(\omega t-\varphi)-\omega\cos(\omega t-\varphi)\right)}{\frac{1}{\tau^2}+\omega^2}\Big]_{t_1}^{t_e} \\
+C &= I_0^2\displaystyle\int e^{-2(t-t_1)/\tau}\,dt \\
+C &= -\dfrac{I_0^2\tau}{2}\Big[e^{-2(t-t_1)/\tau}\Big]_{t_1}^{t_e}
+\end{aligned}$
+\item $I_{RMS} = \sqrt{I_{RMS}^2}$
+\item $P = I_{RMS}^2\,R$
+\item $V_{s,RMS} = \dfrac{V_m}{\sqrt{2}}$
+\item $S = V_{s,RMS}\,I_{RMS}$
+\item $P_{DC} = V_{DC}\,I_{DC}$
+\item $f_p = \dfrac{P}{S}$
+\item $\eta = \dfrac{P_{DC}}{S}$
+\item $FR_V = \dfrac{\sqrt{V_{RMS}^2 - V_{DC}^2}}{V_{DC}}$
+\item $FR_I = \dfrac{\sqrt{I_{RMS}^2 - I_{DC}^2}}{I_{DC}}$
+\item {\footnotesize $v_o(t) = \begin{cases} V_m\sen(\omega t) & t_1\le t\le t_e \\ 0 & t<t_1,\ t>t_e \end{cases}$}
+\item {\footnotesize $i_o(t) = \begin{cases} I_m\sen(\omega t - \varphi) + I_0e^{-(t-t_1)/\tau} & t_1\le t\le t_e \\ 0 & t<t_1,\ t>t_e \end{cases}$}
+\item $Error\,\% = \dfrac{|V_{calc} - V_{sim}|}{V_{calc}}\times 100$
+\end{enumerate}
+
+\end{multicols}
+
+\end{document}
